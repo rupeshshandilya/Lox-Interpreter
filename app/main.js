@@ -39,7 +39,7 @@ if (fileContent.length !== 0) {
       if (char === '"') {
         let stringStart = j;
         let stringEnd = -1;
-      
+
         // Find the closing quote
         for (let k = j + 1; k < lines[i].length; k++) {
           if (lines[i][k] === '"') {
@@ -47,18 +47,18 @@ if (fileContent.length !== 0) {
             break;
           }
         }
-      
+
         if (stringEnd !== -1) {
           // Valid string found
 
           // Include quotes
           const lexeme = lines[i].slice(stringStart, stringEnd + 1);
           // Exclude quotes
-          const literal = lines[i].slice(stringStart + 1, stringEnd); 
+          const literal = lines[i].slice(stringStart + 1, stringEnd);
 
           console.log(`STRING ${lexeme} ${literal}`);
           // Skip to the closing quote
-          j = stringEnd; 
+          j = stringEnd;
         } else {
           // Unterminated string
           console.error(`[line ${i + 1}] Error: Unterminated string.`);
@@ -67,7 +67,43 @@ if (fileContent.length !== 0) {
         }
         continue;
       }
-      
+
+      //For Number Literals
+      if (
+        (char >= "0" && char <= "9") ||
+        (char === "." &&
+          j + 1 < lines[i].length &&
+          lines[i][j + 1] >= "0" &&
+          lines[i][j + 1] <= "9")
+      ) {
+        let numberStart = j;
+        let hasDecimalPoint = false;
+
+        if (char === ".") {
+          hasDecimalPoint = true;
+          j++;
+        }
+
+        while (
+          j < lines.length[i] &&
+          ((lines[i][j] >= "0" && lines[i][j] <= "9") ||
+            (lines[i][j] === "." && !hasDecimalPoint))
+        ) {
+          if (lines[i][j] === ".") {
+            hasDecimalPoint = true;
+          }
+          j++;
+        }
+
+        j--;
+
+        const lexeme = lines[i].slice(numberStart, j + 1);
+        const literal = parseFloat(lexeme);
+        console.log(`NUMBER ${lexeme} ${literal}`);
+        continue;
+      } else if (char === ".") {
+        console.log("DOT . null");
+      }
 
       if (char === "=" && lines[i][j + 1] === "=") {
         console.log("EQUAL_EQUAL == null");
