@@ -102,6 +102,7 @@ if (fileContent.length !== 0) {
       }
 
       if (comment) {
+        comment = false;
         break;
       }
     }
