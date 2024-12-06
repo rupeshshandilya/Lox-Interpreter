@@ -23,6 +23,7 @@ const filename = args[1];
 
 const fileContent = fs.readFileSync(filename, "utf8");
 let hasErrors = false;
+let comment = false;
 
 if (fileContent.length !== 0) {
   let lines = fileContent.split("\n");
@@ -41,6 +42,9 @@ if (fileContent.length !== 0) {
       } else if (char === ">" && lines[i][j + 1] === "=") {
         console.log("GREATER_EQUAL >= null");
         j++;
+      } else if(char === "/" && lines[i][j + 1] === "/"){
+        console.log('SLASH / null');
+        comment = true;
       } else {
         switch (char) {
           case "(":
@@ -92,6 +96,10 @@ if (fileContent.length !== 0) {
             hasErrors = true;
             break;
         }
+      }
+
+      if(comment){
+        break;
       }
     }
   }
