@@ -32,7 +32,7 @@ if (fileContent.length !== 0) {
       const char = lines[i][j];
 
       //For ignoring whitespace characters
-      if (char === " " || char === "\t" || char === "\n") {
+      if (char === " " || char === "\t") {
         continue;
       }
 
