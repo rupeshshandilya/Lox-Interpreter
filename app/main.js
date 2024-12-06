@@ -1,4 +1,5 @@
 import fs from "fs";
+import { KEYWORDS } from "./constants/keywords.js";
 
 const args = process.argv.slice(2);
 
@@ -36,7 +37,7 @@ if (fileContent.length !== 0) {
         continue;
       }
 
-      // Handle Identifiers
+      // Handle Identifiers & Keywords
       if (
         (char >= "a" && char <= "z") ||
         (char >= "A" && char <= "Z") ||
@@ -54,7 +55,13 @@ if (fileContent.length !== 0) {
         }
         const identifierString = lines[i].slice(startingIndex, j);
         j--;
-        console.log(`IDENTIFIER ${identifierString} null`);
+        if (KEYWORDS.includes(identifierString)) {
+          console.log(
+            `${identifierString.toUpperCase()} ${identifierString} null`
+          );
+        } else {
+          console.log(`IDENTIFIER ${identifierString} null`);
+        }
         continue;
       }
 
