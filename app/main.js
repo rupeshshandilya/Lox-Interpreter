@@ -36,6 +36,29 @@ if (fileContent.length !== 0) {
         continue;
       }
 
+      // Handle Identifiers
+      if (
+        (char >= "a" && char <= "z") ||
+        (char >= "A" && char <= "Z") ||
+        char === "_"
+      ) {
+        const startingIndex = j;
+        while (
+          j < lines[i].length &&
+          ((lines[i][j] >= "a" && lines[i][j] <= "z") ||
+            (lines[i][j] >= "A" && lines[i][j] <= "Z") ||
+            lines[i][j] === "_" ||
+            (lines[i][j] >= "0" && lines[i][j] <= "9"))
+        ) {
+          j++;
+        }
+        const identifierString = lines[i].slice(startingIndex, j);
+        j--;
+        console.log(`IDENTIFIER ${identifierString} null`);
+        continue;
+      }
+
+      // For String
       if (char === '"') {
         let stringStart = j;
         let stringEnd = -1;
@@ -69,23 +92,26 @@ if (fileContent.length !== 0) {
       }
 
       //For Number Literals
-      if (lines[i][j] >= '0' && lines[i][j] <= '9') {
-        let numberString = ""+lines[i][j];
-        let k = j+1;
+      if (lines[i][j] >= "0" && lines[i][j] <= "9") {
+        let numberString = "" + lines[i][j];
+        let k = j + 1;
         // Compose the string literal searching for the end of the number (next char not a . or a numeric char)
-        for(k; k<lines[i].length; k++){
-          if(lines[i][k] == '.' || (lines[i][k] >= '0' && lines[i][k] <= '9'))
+        for (k; k < lines[i].length; k++) {
+          if (lines[i][k] == "." || (lines[i][k] >= "0" && lines[i][k] <= "9"))
             numberString += lines[i][k];
-          else
-            break;
+          else break;
         }
-        j = k-1;
+        j = k - 1;
         // If the string is an int add the decimal point at the end
         let floatNumber = parseFloat(numberString);
-        console.log("NUMBER "+numberString+" "+(Number.isInteger(floatNumber)?floatNumber+".0":floatNumber));
+        console.log(
+          "NUMBER " +
+            numberString +
+            " " +
+            (Number.isInteger(floatNumber) ? floatNumber + ".0" : floatNumber)
+        );
         continue;
       }
-          
 
       if (char === "=" && lines[i][j + 1] === "=") {
         console.log("EQUAL_EQUAL == null");
