@@ -42,8 +42,8 @@ if (fileContent.length !== 0) {
       } else if (char === ">" && lines[i][j + 1] === "=") {
         console.log("GREATER_EQUAL >= null");
         j++;
-      } else if(char === "/" && lines[i][j + 1] === "/"){
-        console.log('SLASH / null');
+      } else if (char === "/" && lines[i][j + 1] === "/") {
+        console.log("SLASH / null");
         comment = true;
       } else {
         switch (char) {
@@ -89,6 +89,9 @@ if (fileContent.length !== 0) {
           case ">":
             console.log("GREATER > null");
             break;
+          case "/":
+            console.log("SLASH / null");
+            break;
           default:
             console.error(
               `[line ${i + 1}] Error: Unexpected character: ${char}`
@@ -98,7 +101,7 @@ if (fileContent.length !== 0) {
         }
       }
 
-      if(comment){
+      if (comment) {
         break;
       }
     }
