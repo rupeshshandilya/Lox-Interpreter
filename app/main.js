@@ -22,12 +22,14 @@ const filename = args[1];
 // Uncomment this block to pass the first stage
 
 const fileContent = fs.readFileSync(filename, "utf8");
+let hasErrors = false;
 
 if (fileContent.length !== 0) {
   let lines = fileContent.split("\n");
   for (let i = 0; i < lines.length; i++) {
     for (let j = 0; j < lines[i].length; j++) {
-      switch (lines[i][j]) {
+      const char = lines[i][j];
+      switch (char) {
         case "(":
           console.log("LEFT_PAREN ( null");
           break;
@@ -58,10 +60,22 @@ if (fileContent.length !== 0) {
         case "*":
           console.log("STAR * null");
           break;
+
+        default:
+          console.error(`[line ${i + 1}] Error: Unexpected character: ${char}`);
+          hasErrors = true;
+          break;
       }
     }
   }
   console.log("EOF  null");
+
+  // Exit with code 65 if there were errors
+  if (hasErrors) {
+    process.exit(65);
+  } else {
+    process.exit(0);
+  }
 } else {
   console.log("EOF  null");
 }
