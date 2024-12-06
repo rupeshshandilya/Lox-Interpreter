@@ -69,31 +69,22 @@ if (fileContent.length !== 0) {
       }
 
       //For Number Literals
-      if (char >= "0" && char <= "9" || (char === "." && j + 1 < lines[i].length && lines[i][j + 1] >= "0" && lines[i][j + 1] <= "9")) {
-        let numberStart = j;
-        let hasDecimalPoint = false;
-      
-        if (char === ".") {
-          hasDecimalPoint = true;
-          j++; // Move past the dot
+      if (lines[i][j] >= '0' && lines[i][j] <= '9') {
+        let numberString = ""+lines[i][j];
+        let k = j+1;
+        // Compose the string literal searching for the end of the number (next char not a . or a numeric char)
+        for(k; k<lines[i].length; k++){
+          if(lines[i][k] == '.' || (lines[i][k] >= '0' && lines[i][k] <= '9'))
+            numberString += lines[i][k];
+          else
+            break;
         }
-      
-        while (j < lines[i].length && ((lines[i][j] >= "0" && lines[i][j] <= "9") || (lines[i][j] === "." && !hasDecimalPoint))) {
-          if (lines[i][j] === ".") {
-            hasDecimalPoint = true;
-          }
-          j++;
-        }
-      
-        j--; // Adjust `j` to the last valid character of the number
-      
-        const lexeme = lines[i].slice(numberStart, j + 1);
-        const literal = parseFloat(lexeme); // Convert to float, preserving full precision
-        console.log(`NUMBER ${lexeme} ${literal}`);
+        j = k-1;
+        // If the string is an int add the decimal point at the end
+        let floatNumber = parseFloat(numberString);
+        console.log("NUMBER "+numberString+" "+(Number.isInteger(floatNumber)?floatNumber+".0":floatNumber));
         continue;
       }
-      
-      
           
 
       if (char === "=" && lines[i][j + 1] === "=") {
