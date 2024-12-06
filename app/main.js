@@ -30,6 +30,12 @@ if (fileContent.length !== 0) {
   for (let i = 0; i < lines.length; i++) {
     for (let j = 0; j < lines[i].length; j++) {
       const char = lines[i][j];
+
+      //For ignoring whitespace characters
+      if (char === " " || char === "\t" || char === "\n") {
+        continue;
+      }
+
       if (char === "=" && lines[i][j + 1] === "=") {
         console.log("EQUAL_EQUAL == null");
         j++;
