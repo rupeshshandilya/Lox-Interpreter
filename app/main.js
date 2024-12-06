@@ -69,41 +69,31 @@ if (fileContent.length !== 0) {
       }
 
       //For Number Literals
-      if (
-        (char >= "0" && char <= "9") ||
-        (char === "." &&
-          j + 1 < lines[i].length &&
-          lines[i][j + 1] >= "0" &&
-          lines[i][j + 1] <= "9")
-      ) {
+      if (char >= "0" && char <= "9" || (char === "." && j + 1 < lines[i].length && lines[i][j + 1] >= "0" && lines[i][j + 1] <= "9")) {
         let numberStart = j;
         let hasDecimalPoint = false;
-
+      
         if (char === ".") {
           hasDecimalPoint = true;
           j++;
         }
-
-        while (
-          j < lines.length[i] &&
-          ((lines[i][j] >= "0" && lines[i][j] <= "9") ||
-            (lines[i][j] === "." && !hasDecimalPoint))
-        ) {
+      
+        while (j < lines[i].length && ((lines[i][j] >= "0" && lines[i][j] <= "9") || (lines[i][j] === "." && !hasDecimalPoint))) {
           if (lines[i][j] === ".") {
             hasDecimalPoint = true;
           }
           j++;
         }
-
+      
         j--;
-
+      
         const lexeme = lines[i].slice(numberStart, j + 1);
         const literal = parseFloat(lexeme);
         console.log(`NUMBER ${lexeme} ${literal}`);
         continue;
       } else if (char === ".") {
         console.log("DOT . null");
-      }
+      }      
 
       if (char === "=" && lines[i][j + 1] === "=") {
         console.log("EQUAL_EQUAL == null");
