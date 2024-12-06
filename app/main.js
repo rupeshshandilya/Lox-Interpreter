@@ -32,8 +32,14 @@ if (fileContent.length !== 0) {
       if (char === "=" && lines[i][j + 1] === "=") {
         console.log("EQUAL_EQUAL == null");
         j++;
-      } else if(char === '!' && lines[i][j + 1] === "="){
-        console.log('BANG_EQUAL != null');
+      } else if (char === "!" && lines[i][j + 1] === "=") {
+        console.log("BANG_EQUAL != null");
+        j++;
+      } else if (char === "<" && lines[i][j + 1] === "=") {
+        console.log("LESS_EQUAL <= null");
+        j++;
+      } else if (char === ">" && lines[i][j + 1] === "=") {
+        console.log("GREATER_EQUAL >= null");
         j++;
       } else {
         switch (char) {
@@ -72,6 +78,12 @@ if (fileContent.length !== 0) {
             break;
           case "!":
             console.log("BANG ! null");
+            break;
+          case "<":
+            console.log("LESS < null");
+            break;
+          case ">":
+            console.log("GREATER > null");
             break;
           default:
             console.error(
