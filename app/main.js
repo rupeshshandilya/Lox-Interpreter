@@ -38,7 +38,7 @@ if (fileContent.length !== 0) {
       }
     }
   }
-  onsole.log("EOF  null");
+  console.log("EOF  null");
 } else {
   console.log("EOF  null");
 }
