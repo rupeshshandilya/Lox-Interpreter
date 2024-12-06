@@ -29,42 +29,51 @@ if (fileContent.length !== 0) {
   for (let i = 0; i < lines.length; i++) {
     for (let j = 0; j < lines[i].length; j++) {
       const char = lines[i][j];
-      switch (char) {
-        case "(":
-          console.log("LEFT_PAREN ( null");
-          break;
-        case ")":
-          console.log("RIGHT_PAREN ) null");
-          break;
-        case "{":
-          console.log("LEFT_BRACE { null");
-          break;
-        case "}":
-          console.log("RIGHT_BRACE } null");
-          break;
-        case ".":
-          console.log("DOT . null");
-          break;
-        case ",":
-          console.log("COMMA , null");
-          break;
-        case "+":
-          console.log("PLUS + null");
-          break;
-        case "-":
-          console.log("MINUS - null");
-          break;
-        case ";":
-          console.log("SEMICOLON ; null");
-          break;
-        case "*":
-          console.log("STAR * null");
-          break;
-
-        default:
-          console.error(`[line ${i + 1}] Error: Unexpected character: ${char}`);
-          hasErrors = true;
-          break;
+      if (char === "=" && lines[i][j + 1] === "=") {
+        console.log("EQUAL_EQUAL == null");
+        j++;
+      } else {
+        switch (char) {
+          case "(":
+            console.log("LEFT_PAREN ( null");
+            break;
+          case ")":
+            console.log("RIGHT_PAREN ) null");
+            break;
+          case "{":
+            console.log("LEFT_BRACE { null");
+            break;
+          case "}":
+            console.log("RIGHT_BRACE } null");
+            break;
+          case ".":
+            console.log("DOT . null");
+            break;
+          case ",":
+            console.log("COMMA , null");
+            break;
+          case "+":
+            console.log("PLUS + null");
+            break;
+          case "-":
+            console.log("MINUS - null");
+            break;
+          case ";":
+            console.log("SEMICOLON ; null");
+            break;
+          case "*":
+            console.log("STAR * null");
+            break;
+          case "=":
+            console.log("EQUAL = null");
+            break;
+          default:
+            console.error(
+              `[line ${i + 1}] Error: Unexpected character: ${char}`
+            );
+            hasErrors = true;
+            break;
+        }
       }
     }
   }
