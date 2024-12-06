@@ -93,7 +93,8 @@ if (fileContent.length !== 0) {
         continue;
       } else if (char === ".") {
         console.log("DOT . null");
-      }      
+      }
+          
 
       if (char === "=" && lines[i][j + 1] === "=") {
         console.log("EQUAL_EQUAL == null");
