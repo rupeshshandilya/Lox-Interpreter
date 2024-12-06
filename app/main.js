@@ -43,7 +43,6 @@ if (fileContent.length !== 0) {
         console.log("GREATER_EQUAL >= null");
         j++;
       } else if (char === "/" && lines[i][j + 1] === "/") {
-        console.log("SLASH / null");
         comment = true;
       } else {
         switch (char) {
