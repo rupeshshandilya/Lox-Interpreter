@@ -75,7 +75,7 @@ if (fileContent.length !== 0) {
       
         if (char === ".") {
           hasDecimalPoint = true;
-          j++;
+          j++; // Move past the dot
         }
       
         while (j < lines[i].length && ((lines[i][j] >= "0" && lines[i][j] <= "9") || (lines[i][j] === "." && !hasDecimalPoint))) {
@@ -85,15 +85,14 @@ if (fileContent.length !== 0) {
           j++;
         }
       
-        j--;
+        j--; // Adjust `j` to the last valid character of the number
       
         const lexeme = lines[i].slice(numberStart, j + 1);
-        const literal = parseFloat(lexeme);
+        const literal = parseFloat(lexeme).toFixed(1); // Ensure float representation
         console.log(`NUMBER ${lexeme} ${literal}`);
         continue;
-      } else if (char === ".") {
-        console.log("DOT . null");
       }
+      
           
 
       if (char === "=" && lines[i][j + 1] === "=") {
