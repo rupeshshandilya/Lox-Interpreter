@@ -32,6 +32,9 @@ if (fileContent.length !== 0) {
       if (char === "=" && lines[i][j + 1] === "=") {
         console.log("EQUAL_EQUAL == null");
         j++;
+      } else if(char === '!' && lines[i][j + 1] === "="){
+        console.log('BANG_EQUAL != null');
+        j++;
       } else {
         switch (char) {
           case "(":
@@ -66,6 +69,9 @@ if (fileContent.length !== 0) {
             break;
           case "=":
             console.log("EQUAL = null");
+            break;
+          case "!":
+            console.log("BANG ! null");
             break;
           default:
             console.error(
