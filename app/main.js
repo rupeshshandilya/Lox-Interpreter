@@ -36,6 +36,39 @@ if (fileContent.length !== 0) {
         continue;
       }
 
+      if (char === '"') {
+        let stringStart = j;
+        let stringEnd = -1;
+      
+        // Find the closing quote
+        for (let k = j + 1; k < lines[i].length; k++) {
+          if (lines[i][k] === '"') {
+            stringEnd = k;
+            break;
+          }
+        }
+      
+        if (stringEnd !== -1) {
+          // Valid string found
+
+          // Include quotes
+          const lexeme = lines[i].slice(stringStart, stringEnd + 1);
+          // Exclude quotes
+          const literal = lines[i].slice(stringStart + 1, stringEnd); 
+
+          console.log(`STRING ${lexeme} ${literal}`);
+          // Skip to the closing quote
+          j = stringEnd; 
+        } else {
+          // Unterminated string
+          console.error(`[line ${i + 1}] Error: Unterminated string.`);
+          hasErrors = true;
+          break;
+        }
+        continue;
+      }
+      
+
       if (char === "=" && lines[i][j + 1] === "=") {
         console.log("EQUAL_EQUAL == null");
         j++;
@@ -122,4 +155,5 @@ if (fileContent.length !== 0) {
   }
 } else {
   console.log("EOF  null");
+  process.exit(0);
 }
