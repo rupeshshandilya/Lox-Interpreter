@@ -88,10 +88,11 @@ if (fileContent.length !== 0) {
         j--; // Adjust `j` to the last valid character of the number
       
         const lexeme = lines[i].slice(numberStart, j + 1);
-        const literal = parseFloat(lexeme).toFixed(1); // Ensure float representation
+        const literal = parseFloat(lexeme); // Convert to float, preserving full precision
         console.log(`NUMBER ${lexeme} ${literal}`);
         continue;
       }
+      
       
           
 
