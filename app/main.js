@@ -24,11 +24,10 @@ const filename = args[1];
 const fileContent = fs.readFileSync(filename, "utf8");
 
 if (fileContent.length !== 0) {
-  const lines = fileContent.split("/n");
+  let lines = fileContent.split("\n");
   for (let i = 0; i < lines.length; i++) {
     for (let j = 0; j < lines[i].length; j++) {
-      const char = lines[j];
-      switch (char) {
+      switch (lines[i][j]) {
         case "(":
           console.log("LEFT_PAREN ( null");
           break;
