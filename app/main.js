@@ -26,7 +26,7 @@ const fileContent = fs.readFileSync(filename, "utf8");
 if (fileContent.length !== 0) {
   const lines = fileContent.split("/n");
   for (let i = 0; i < lines.length; i++) {
-    for (let j = 0; j < lines.length; j++) {
+    for (let j = 0; j < lines[i].length; j++) {
       const char = lines[j];
       switch (char) {
         case "(":
@@ -38,6 +38,7 @@ if (fileContent.length !== 0) {
       }
     }
   }
+  onsole.log("EOF  null");
 } else {
   console.log("EOF  null");
 }
