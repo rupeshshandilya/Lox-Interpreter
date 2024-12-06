@@ -1,6 +1,6 @@
 import fs from "fs";
 
-const args = process.argv.slice(2); 
+const args = process.argv.slice(2);
 
 if (args.length < 2) {
   console.error("Usage: ./your_program.sh tokenize <filename>");
@@ -24,7 +24,21 @@ const filename = args[1];
 const fileContent = fs.readFileSync(filename, "utf8");
 
 if (fileContent.length !== 0) {
-  throw new Error("Scanner not implemented");
+  const lines = fileContent.split("/n");
+  for (let i = 0; i < lines.length; i++) {
+    for (let j = 0; j < lines.length; j++) {
+      const char = lines[j];
+      switch (char) {
+        case "(":
+          console.log("LEFT_PAREN ( null");
+          break;
+        case ")":
+          console.log("RIGHT_PAREN ) null");
+          break;
+      }
+    }
+  }
+  console.log('EOF  null');
 } else {
   console.log("EOF  null");
 }
